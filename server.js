@@ -1,7 +1,14 @@
-const express = require('express');
-const axios = require('axios');
-const path = require('path');
-require('dotenv').config();
+import express from 'express';
+import axios from 'axios';
+import path from 'path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+// Get the directory name from the current module's URL
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,13 +37,23 @@ app.get('/api/news/:city', async (req, res) => {
   }
 });
 
-// City data API route
+// City Data API route
 app.get('/api/citydata/:city', async (req, res) => {
   try {
     const { city } = req.params;
-    const response = await axios.get(`http://geodb-free-service.wirefreethought.com/v1/geo/cities?namePrefix=${city}&limit=1&offset=0&hateoasMode=false`);
+    console.log(`Fetching data for city: ${city}`);
+    const response = await axios.get('https://cities-data-lookup-apiverve.p.rapidapi.com/v1/citieslookup', {
+      params: { city },
+      headers: {
+        'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+        'x-rapidapi-host': 'cities-data-lookup-apiverve.p.rapidapi.com',
+        Accept: 'application/json'
+      }
+    });
     res.json(response.data);
+    console.log(response.data);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error fetching city data' });
   }
 });

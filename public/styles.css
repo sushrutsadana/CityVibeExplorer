@@ -1,12 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8c52ff 0%, #ff914d 100%);
+    background-size: 400% 400%;
+    animation: gradientRotation 15s ease infinite;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@keyframes gradientRotation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
@@ -20,11 +37,21 @@ body {
 }
 
 h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4.25rem;
+    font-weight: 700;
     text-align: center;
     color: #4a4a4a;
     margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+h2 {
+    text-align: center;
+    color: #4a4a4a;
+    margin-bottom: 2rem;
+    font-family: 'Raleway', sans-serif;
+}
 .search-container {
     display: flex;
     margin-bottom: 1rem;
